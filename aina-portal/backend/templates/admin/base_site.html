@@ -1,0 +1,40 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | AINA Portal Yönetim{% endblock %}
+
+{% block extrahead %}
+  {{ block.super }}
+  <link rel="icon" type="image/svg+xml" href="{% static 'branding/aina-mark.svg' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'branding/favicon-32.png' %}">
+{% endblock %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <style>
+    :root, html[data-theme="light"], html[data-theme="dark"] {
+      --primary: #1f5fbf; --secondary: #0b1a2e; --header-bg: #0b1a2e;
+      --header-link-color: #c6d2e3; --link-fg: #1f5fbf; --link-selected-fg: #184f9f;
+      --breadcrumbs-bg: #183457; --button-bg: #1f5fbf; --button-hover-bg: #184f9f;
+      --default-button-bg: #184f9f; --default-button-hover-bg: #143a7c;
+    }
+    #site-name a { text-decoration: none; }
+    #site-name img { width: 34px; height: 34px; }
+    #site-name img.aina-wordmark { width: auto; height: 30px; }
+    #site-name .aina-name { font-weight: 700; letter-spacing: .14em; color: #fff; }
+    #site-name .aina-sub { white-space: nowrap; margin-left: 6px; padding-left: 12px; border-left: 1px solid #2c4366; font-size: .7em; letter-spacing: .1em; color: #8ea2bd; text-transform: uppercase; }
+  </style>
+{% endblock %}
+
+{% block branding %}
+  <div id="site-name">
+    <a href="{% url 'admin:index' %}" style="display:inline-flex;align-items:center;gap:10px">
+      <img src="{% static 'branding/aina-mark.svg' %}" alt="" width="34" height="34">
+      <img src="{% static 'branding/aina-wordmark-dark.svg' %}" alt="AINA — AI ATM Network Assistant" class="aina-wordmark">
+      <span class="aina-sub">Yönetim Paneli</span>
+    </a>
+  </div>
+  {% if user.is_anonymous %}{% include "admin/color_theme_toggle.html" %}{% endif %}
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
